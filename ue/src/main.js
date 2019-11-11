@@ -20,6 +20,7 @@ Vue.TmsAxios({
   rules: [rule]
 })
 
+Vue.prototype.$eventHub = new Vue();
 Vue.config.productionTip = false
 
 new Vue({

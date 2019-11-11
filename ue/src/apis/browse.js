@@ -39,9 +39,15 @@ export default {
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
-  transform(src) {
+  transform(src, transforms) {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/transform?src=${src}`)
+      .get(`${process.env.VUE_APP_API_HOST}/transform?src=${src}&transforms=${transforms}`)
+      .then(rst => rst.data.result)
+      .catch(err => Promise.reject(err))
+  },
+  transforms() {
+    return TmsAxios.ins(name)
+      .get(`${process.env.VUE_APP_API_HOST}/transforms`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },

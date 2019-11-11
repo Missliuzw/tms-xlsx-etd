@@ -27,16 +27,23 @@ export default {
   },
   methods: {
     handleConsole(index, file) {
+      console.log(file.path)
       this.$router.push({ path: 'console', query: { src: file.path } })
     },
     handleDelete(index, file) {
       browser.remove(file).then(() => {
         this.files.splice(index, 1)
       })
+    },
+    getFileList() {
+      browser.files().then(files => this.files = files)
     }
   },
   mounted() {
-    browser.files().then(files => (this.files = files))
+    this.getFileList();
+    this.$eventHub.$on('getFileList', () => {
+      this.getFileList();
+    })
   }
 }
 </script>

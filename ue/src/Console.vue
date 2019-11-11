@@ -18,6 +18,11 @@
       <tms-flex direction="column">
         <div>{{file.name}}</div>
         <div>
+          <el-checkbox-group v-model="checkedDispatchers">
+            <el-checkbox v-for="d in dispatchers" :key="d[0]" :label="d[0]">{{d[2].description}}</el-checkbox>
+          </el-checkbox-group>
+        </div>
+        <div>
           <el-button size="mini" type="primary" @click="extract">提取</el-button>
           <el-button size="mini" type="primary" @click="transform">加工</el-button>
         </div>
@@ -54,7 +59,9 @@ export default {
       file: { name: '' },
       category: 'raw',
       columns: null,
-      rows: null
+      rows: null,
+      dispatchers: [],
+      checkedDispatchers: []
     }
   },
   props: ['src'],
@@ -68,9 +75,13 @@ export default {
         })
       })
     })
+    browser.transforms().then(dispatchers => {
+      this.dispatchers = dispatchers
+    })
   },
   methods: {
     shiftCategory() {
+      // con
       browser.rows(this.src, this.category).then(rows => {
         this.rows = rows
       })
@@ -81,7 +92,7 @@ export default {
       })
     },
     transform() {
-      browser.transform(this.src).then(() => {
+      browser.transform(this.src, this.checkedDispatchers).then(() => {
         this.shiftCategory()
       })
     }
