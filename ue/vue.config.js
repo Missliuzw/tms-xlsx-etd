@@ -6,7 +6,7 @@ module.exports = {
   publicPath: "/etdue/",
 
   // 输出文件目录
-  outputDir: "./public/etdue",
+  outputDir: "../back/public/etdue",
   devServer: {
     proxy: target
   }
