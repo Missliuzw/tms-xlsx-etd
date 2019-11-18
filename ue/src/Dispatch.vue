@@ -14,7 +14,7 @@
         <div>{{file.name}}</div>
         <div>
           <el-checkbox-group v-model="checkedDispatchers">
-            <el-checkbox v-for="d in dispatchers" :key="d[0]" :label="d[0]">{{d[2].description}}</el-checkbox>
+            <el-checkbox v-for="d in dispatchers" :key="d[0]" :label="d[0]" style="display: block;">{{d[2].description}}</el-checkbox>
           </el-checkbox-group>
         </div>
         <div>
@@ -61,7 +61,9 @@ export default {
   },
   methods: {
     dispatch() {
-      browser.dispatch(this.src, this.checkedDispatchers).then(() => {})
+      browser.dispatch(this.src, this.checkedDispatchers).then(() => {
+        this.$eventHub.$emit('dispatchList', this.src)
+      })
     }
   }
 }

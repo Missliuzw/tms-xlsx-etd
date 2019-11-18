@@ -19,7 +19,7 @@
         <div>{{file.name}}</div>
         <div>
           <el-checkbox-group v-model="checkedDispatchers">
-            <el-checkbox v-for="d in dispatchers" :key="d[0]" :label="d[0]">{{d[2].description}}</el-checkbox>
+            <el-checkbox v-for="d in dispatchers" :key="d[0]" :label="d[0]" style="display: block;">{{d[2].description}}</el-checkbox>
           </el-checkbox-group>
         </div>
         <div>
@@ -81,7 +81,6 @@ export default {
   },
   methods: {
     shiftCategory() {
-      // con
       browser.rows(this.src, this.category).then(rows => {
         this.rows = rows
       })
@@ -99,3 +98,8 @@ export default {
   }
 }
 </script>
+<style>
+.etd-console .tms-frame__main__center {
+  width: calc(75% - 16px);
+}
+</style>

@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     handleConsole(index, file) {
-      console.log(file.path)
       this.$router.push({ path: 'console', query: { src: file.path } })
     },
     handleDelete(index, file) {
