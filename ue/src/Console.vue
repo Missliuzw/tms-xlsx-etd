@@ -3,7 +3,7 @@
     <template v-slot:center>
       <tms-flex direction="column" align-items="stretch">
         <tms-flex>
-          <router-link to="/etdue/home">首页</router-link>
+          <router-link to="/etdue">首页</router-link>
           <el-radio-group v-model="category" v-on:change="shiftCategory">
             <el-radio-button label="raw">全部</el-radio-button>
             <el-radio-button label="passed">通过</el-radio-button>

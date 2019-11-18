@@ -3,7 +3,7 @@
     <template v-slot:center>
       <tms-flex direction="column" align-items="stretch">
         <tms-flex>
-          <router-link to="/etdue/home">首页</router-link>
+          <router-link to="/etdue">首页</router-link>
           <router-link :to="'/etdue/console?src='+src">返回</router-link>
         </tms-flex>
         <dispatch-logs :src="src"></dispatch-logs>
