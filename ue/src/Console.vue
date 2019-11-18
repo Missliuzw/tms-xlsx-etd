@@ -3,13 +3,13 @@
     <template v-slot:center>
       <tms-flex direction="column" align-items="stretch">
         <tms-flex>
-          <router-link to="/home">首页</router-link>
+          <router-link to="/etdue/home">首页</router-link>
           <el-radio-group v-model="category" v-on:change="shiftCategory">
             <el-radio-button label="raw">全部</el-radio-button>
             <el-radio-button label="passed">通过</el-radio-button>
             <el-radio-button label="failed">去除</el-radio-button>
           </el-radio-group>
-          <router-link :to="'/dispatch?src='+src">分发</router-link>
+          <router-link :to="'/etdue/dispatch?src='+src">分发</router-link>
         </tms-flex>
         <rows :columns="columns" :rows="rows"></rows>
       </tms-flex>

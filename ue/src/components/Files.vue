@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     handleConsole(index, file) {
-      this.$router.push({ path: 'console', query: { src: file.path } })
+      this.$router.push({ path: '/etdue/console', query: { src: file.path } })
     },
     handleDelete(index, file) {
       browser.remove(file).then(() => {
