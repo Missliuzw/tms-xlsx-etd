@@ -5,7 +5,7 @@
     <el-table-column prop="strResult" label="结果"></el-table-column>
     <el-table-column label="操作" >
 				<template scope="scope">
-          <a :href="scope.row.result.outPath" download="" v-if="scope.row.result.outPath">下载</a>
+          <a :href="scope.row.result.outPath" download="" v-if="scope.row.result && scope.row.result.outPath">下载</a>
 					<!-- <el-button size="small" type="primary" v-if="scope.row.result.outPath" @click="handleDownload(scope.$index, scope.row)">下载</el-button> -->
         </template>
     </el-table-column>
