@@ -1,72 +1,85 @@
 import { TmsAxios } from 'tms-vue'
 
-const name = 'etd-api'
+const name = process.env.VUE_APP_TMSAXIOS_NAME
+const api = process.env.VUE_APP_API_HOST
 
 export default {
   columns() {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/columns`)
+      .get(`${api}/columns`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   files() {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/files`)
+      .get(`${api}/files`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   fileInfo(src) {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/fileInfo?src=${src}`)
+      .get(`${api}/fileInfo?src=${src}`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   rows(src, category) {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/rows?src=${src}&category=${category}`)
+      .get(`${api}/rows?src=${src}&category=${category}`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   remove(file) {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/remove?src=${file.path}`)
+      .get(`${api}/remove?src=${file.path}`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   extract(src) {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/extract?src=${src}`)
+      .get(`${api}/extract?src=${src}`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   transform(src, transforms) {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/transform?src=${src}&transforms=${transforms}`)
+      .get(`${api}/transform?src=${src}&transforms=${transforms}`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   transforms() {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/transforms`)
+      .get(`${api}/transforms`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   dispatchers() {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/dispatchers`)
+      .get(`${api}/dispatchers`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
   dispatch(src, dispatchers) {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/dispatch?src=${src}&dispatcher=${dispatchers}`)
+      .get(`${api}/dispatch?src=${src}&dispatcher=${dispatchers}`)
       .then(rst => rst.data.result)
       .catch(() => true)
   },
   dispatchLogs(src) {
     return TmsAxios.ins(name)
-      .get(`${process.env.VUE_APP_API_HOST}/dispatchLogs?src=${src}`)
+      .get(`${api}/dispatchLogs?src=${src}`)
       .then(rst => rst.data.result)
       .catch(() => true)
+  },
+  fnGetCaptcha() {
+    return TmsAxios.ins(name)
+    .post(`/etd/ue/auth/captcha`)
+    .then(rst => Promise.resolve(rst.data))
+    .catch(err => Promise.reject({err, message: err.msg}))
+  },
+  fnGetToken(params) {
+    return TmsAxios.ins(name)
+    .post(`/etd/ue/auth/token`, params)
+    .then(rst => Promise.resolve(rst.data))
+    .catch(err => Promise.reject({err, message: err.msg}))
   }
 }

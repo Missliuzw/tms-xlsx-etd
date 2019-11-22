@@ -1,5 +1,8 @@
 <template>
   <tms-frame class="etd-home" :display="{header:true,footer:true,right:true}">
+    <template v-slot:header>
+      <menus></menus>
+    </template>
     <template v-slot:center>
       <files></files>
     </template>
@@ -15,9 +18,10 @@ Vue.use(Frame)
 
 import Files from './components/Files.vue'
 import Bench from './components/Bench.vue'
+import Menus from './components/Menu.vue'
 
 export default {
   name: 'etd-home',
-  components: { Files, Bench }
+  components: { Files, Bench, Menus }
 }
 </script>
