@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-upload class="etd-upload" action="/etd/api/upload" :data="fileInfo" :on-success="handleAvatarSuccess" :on-preview="handlePreview">
+    <el-upload class="etd-upload" :action="'/etd/api/upload?access_token='+token" :data="fileInfo" :on-success="handleAvatarSuccess" :on-preview="handlePreview">
       <el-button size="small" type="primary">上传xlsx文件</el-button>
     </el-upload>
     <el-input type="textarea" autosize placeholder="备注" v-model="fileInfo.remark"></el-input>
@@ -15,13 +15,19 @@ Vue.use(Upload)
 
 export default {
   data() {
-    return { fileInfo: { remark: '' } }
+    return { 
+      fileInfo: { remark: '' },
+      token: ''
+     }
   },
   // created() {
   //   this.$eventHub.$on('download', res => {
   //     console.log(res)
   //   })
   // },
+  mounted() {
+    this.token = localStorage.getItem('access_token');
+  },
   methods:{
     handleAvatarSuccess() {
       this.$eventHub.$emit('getFileList')
