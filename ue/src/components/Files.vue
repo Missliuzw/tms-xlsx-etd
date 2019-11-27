@@ -13,7 +13,7 @@
 </template>
 <script>
 import Vue from 'vue'
-import { Table, TableColumn } from 'element-ui'
+import { Table, TableColumn, Message, MessageBox } from 'element-ui'
 
 Vue.use(Table).use(TableColumn)
 
@@ -30,9 +30,24 @@ export default {
       this.$router.push({ path: '/console', query: { src: file.path } })
     },
     handleDelete(index, file) {
-      browser.remove(file).then(() => {
-        this.files.splice(index, 1)
-      })
+      MessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(() => {
+        browser.remove(file).then(() => {
+          this.files.splice(index, 1)
+          Message.success({
+            type: 'success',
+            message: '删除成功!'
+          });
+        })
+      }).catch(() => {
+        Message.success({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     },
     getFileList() {
       browser.files().then(files => this.files = files)

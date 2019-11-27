@@ -7,15 +7,9 @@ import { TmsAxiosPlugin } from 'tms-vue'
 Vue.use(TmsAxiosPlugin)
 
 const rule = Vue.TmsAxios.newInterceptorRule({
-  requestParams: new Map([['access_token', '']]),
-  onRetryAttempt: (res, rule) => {
-    // 缺少access_token
-    if (res.data.code === 10001) {
-      return new Promise(resolve => {
-        rule.requestParams.set('access_token', localStorage.getItem('access_token'))
-        resolve(true)
-      })
-    } else if(res.data.code === 20001){
+  requestParams: new Map([['access_token', localStorage.getItem('access_token') || '']]),
+  onRetryAttempt: (res) => {
+    if(res.data.code === 20001){
       // access_token过期
       router.push('/login');
     }
