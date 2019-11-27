@@ -1,7 +1,7 @@
 <template>
   <el-table :data="files" border stripe style="width: 100%">
     <el-table-column prop="name" label="名称" width="280px"></el-table-column>
-    <el-table-column prop="upload_at" label="上传时间" width="200px"></el-table-column>
+    <el-table-column prop="upload_at" label="上传时间" width="200px" :formatter="formatterUploadAt"></el-table-column>
     <el-table-column prop="remark" label="备注"></el-table-column>
     <el-table-column fixed="right" label="操作" width="160px">
       <template slot-scope="scope">
@@ -26,6 +26,19 @@ export default {
     }
   },
   methods: {
+    formatterUploadAt(row, column, cellValue) {
+      const time = new Date(cellValue);
+      const year = time.getFullYear(); 
+      const month = time.getMonth()+1; 
+      const date = time.getDate(); 
+      const hour = time.getHours(); 
+      const minute = time.getMinutes(); 
+      const second = time.getSeconds(); 
+      return year + "年" + month + "月" + date + "日" + " " + this.isGreaterTen(hour) + ":" + this.isGreaterTen(minute) + ":" + this.isGreaterTen(second);
+    },
+    isGreaterTen(time) {
+      return time > 10 ? time : '0' + time;
+    },
     handleConsole(index, file) {
       this.$router.push({ path: '/console', query: { src: file.path } })
     },
