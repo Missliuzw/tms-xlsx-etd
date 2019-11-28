@@ -11,7 +11,7 @@
           </el-radio-group>
           <router-link :to="'/dispatch?src='+src">分发</router-link>
         </tms-flex>
-        <rows :columns="columns" :rows="rows"></rows>
+        <rows :columns="columns" :rows="rows" @updateList="shiftCategory"></rows>
       </tms-flex>
     </template>
     <template v-slot:right>
@@ -80,8 +80,14 @@ export default {
     })
   },
   methods: {
-    shiftCategory() {
-      browser.rows(this.src, this.category).then(rows => {
+    shiftCategory(page = 1, size = 10) {
+      const params = {
+        src: this.src,
+        category: this.category,
+        page: page,
+        size: size
+      }
+      browser.rows(params).then(rows => {
         this.rows = rows
       })
     },

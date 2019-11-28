@@ -22,9 +22,10 @@ export default {
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
-  rows(src, category) {
+  rows(params) {
+    const { src, category, page, size } = params;
     return TmsAxios.ins(name)
-      .get(`${api}/rows?src=${src}&category=${category}`)
+      .get(`${api}/rows?src=${src}&category=${category}&page=${page}&size=${size}`)
       .then(rst => rst.data.result)
       .catch(err => Promise.reject(err))
   },
