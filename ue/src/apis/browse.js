@@ -75,12 +75,12 @@ export default {
     return TmsAxios.ins(name)
     .post(`/etd/ue/auth/captcha`)
     .then(rst => Promise.resolve(rst.data))
-    .catch(err => Promise.reject({err, message: err.msg}))
+    .catch(err => Promise.resolve(err))
   },
   fnGetToken(params) {
     return TmsAxios.ins(name)
     .post(`/etd/ue/auth/token`, params)
     .then(rst => Promise.resolve(rst.data))
-    .catch(err => Promise.reject({err, message: err.msg}))
+    .catch(err => Promise.resolve(err))
   }
 }
