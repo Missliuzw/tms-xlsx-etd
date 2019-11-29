@@ -1,5 +1,5 @@
 <template>
-  <div v-if="rows && rows.total">
+  <div v-if="rows">
     <el-table :data="rows.rows" border stripe style="width: 100%">
       <el-table-column v-for="c in columns" :key="c.name" :prop="c.name" :label="c.label"></el-table-column>
     </el-table>
