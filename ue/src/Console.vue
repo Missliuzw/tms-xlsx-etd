@@ -4,7 +4,7 @@
       <tms-flex direction="column" align-items="stretch">
         <tms-flex>
           <router-link to="/home">首页</router-link>
-          <el-radio-group v-model="category" v-on:change="shiftCategory">
+          <el-radio-group v-model="category" v-on:change="tabChange">
             <el-radio-button label="raw">全部</el-radio-button>
             <el-radio-button label="passed">通过</el-radio-button>
             <el-radio-button label="failed">去除</el-radio-button>
@@ -61,7 +61,7 @@ export default {
       columns: null,
       rows: null,
       dispatchers: [],
-      checkedDispatchers: []
+      checkedDispatchers: [],
     }
   },
   props: ['src'],
@@ -78,7 +78,12 @@ export default {
     })
   },
   methods: {
+    tabChange(currentTab) {
+      this.category = currentTab;
+      this.shiftCategory();
+    },
     shiftCategory(page = 1, size = 10) {
+      console.log(page)
       const params = {
         src: this.src,
         category: this.category,
