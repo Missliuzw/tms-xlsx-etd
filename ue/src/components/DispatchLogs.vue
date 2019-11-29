@@ -1,12 +1,11 @@
 <template>
   <el-table :data="logs" border stripe style="width: 100%">
     <el-table-column prop="dispatcher" label="分发结果" width="280px"></el-table-column>
-    <el-table-column prop="dispatch_at" label="发送时间" width="200px"></el-table-column>
+    <el-table-column prop="dispatch_at" label="发送时间" width="200px" :formatter="formatterUploadAt"></el-table-column>
     <el-table-column prop="strResult" label="结果"></el-table-column>
     <el-table-column label="操作" >
 				<template scope="scope">
           <a :href="scope.row.result.outPath" download="" v-if="scope.row.result && scope.row.result.outPath">下载</a>
-					<!-- <el-button size="small" type="primary" v-if="scope.row.result.outPath" @click="handleDownload(scope.$index, scope.row)">下载</el-button> -->
         </template>
     </el-table-column>
   </el-table>
@@ -33,11 +32,20 @@ export default {
     })
   },
   methods: {
-    handleDownload(index, row) {
-      console.log(index, row)
+    formatterUploadAt(row, column, cellValue) {
+      const time = new Date(cellValue);
+      const year = time.getFullYear(); 
+      const month = time.getMonth()+1; 
+      const date = time.getDate(); 
+      const hour = time.getHours(); 
+      const minute = time.getMinutes(); 
+      const second = time.getSeconds(); 
+      return year + "年" + month + "月" + date + "日" + " " + this.isGreaterTen(hour) + ":" + this.isGreaterTen(minute) + ":" + this.isGreaterTen(second);
+    },
+    isGreaterTen(time) {
+      return time > 10 ? time : '0' + time;
     },
     dispatchList(src) {
-      console.log(src)
       browser.dispatchLogs(src).then(logs => {
         logs.forEach(l => {
           l.strResult = JSON.stringify(l.result)
