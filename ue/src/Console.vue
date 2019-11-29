@@ -70,9 +70,7 @@ export default {
       this.file = file
       browser.columns().then(cols => {
         this.columns = cols
-        browser.rows(this.src).then(rows => {
-          this.rows = rows
-        })
+        this.shiftCategory()
       })
     })
     browser.transforms().then(dispatchers => {
