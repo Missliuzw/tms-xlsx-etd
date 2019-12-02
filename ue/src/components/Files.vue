@@ -37,7 +37,7 @@ export default {
       return year + "年" + month + "月" + date + "日" + " " + this.isGreaterTen(hour) + ":" + this.isGreaterTen(minute) + ":" + this.isGreaterTen(second);
     },
     isGreaterTen(time) {
-      return time > 10 ? time : '0' + time;
+      return time > 9 ? time : '0' + time;
     },
     handleConsole(index, file) {
       this.$router.push({ path: '/console', query: { src: file.path } })

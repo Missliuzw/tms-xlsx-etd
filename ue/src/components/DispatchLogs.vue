@@ -43,7 +43,7 @@ export default {
       return year + "年" + month + "月" + date + "日" + " " + this.isGreaterTen(hour) + ":" + this.isGreaterTen(minute) + ":" + this.isGreaterTen(second);
     },
     isGreaterTen(time) {
-      return time > 10 ? time : '0' + time;
+      return time > 9 ? time : '0' + time;
     },
     dispatchList(src) {
       browser.dispatchLogs(src).then(logs => {
