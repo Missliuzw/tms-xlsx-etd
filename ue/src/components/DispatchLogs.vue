@@ -26,9 +26,10 @@ export default {
     }
   },
   mounted() {
-    this.dispatchList(this.src);
+    this.dispatchList(this.src)
+    this.$eventHub.$off('dispatchList')
     this.$eventHub.$on('dispatchList', src => {
-      this.dispatchList(src);
+      this.dispatchList(src)
     })
   },
   methods: {
