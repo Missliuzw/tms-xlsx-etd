@@ -40,7 +40,8 @@ import {
   RadioGroup,
   RadioButton,
   CheckboxGroup,
-  Checkbox
+  Checkbox,
+  Message
 } from 'element-ui'
 Vue.use(Button)
   .use(RadioGroup)
@@ -82,8 +83,7 @@ export default {
       this.category = currentTab;
       this.shiftCategory();
     },
-    shiftCategory(page = 1, size = 10) {
-      console.log(page)
+    shiftCategory(page = 1, size = 10, type) {
       const params = {
         src: this.src,
         category: this.category,
@@ -92,16 +92,21 @@ export default {
       }
       browser.rows(params).then(rows => {
         this.rows = rows
+        if (!type) {
+          return
+        }
+        const msg = type === 'extract' ? '提取完成' : type === 'transform' ? '加工完成' : ''
+        Message({ message: msg, type: 'success', showClose: true })
       })
     },
     extract() {
       browser.extract(this.src).then(() => {
-        this.shiftCategory()
+        this.shiftCategory(undefined, undefined, 'extract')
       })
     },
     transform() {
       browser.transform(this.src, this.checkedDispatchers).then(() => {
-        this.shiftCategory()
+        this.shiftCategory(undefined, undefined, 'transform')
       })
     }
   }

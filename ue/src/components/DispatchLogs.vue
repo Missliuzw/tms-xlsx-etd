@@ -12,7 +12,7 @@
 </template>
 <script>
 import Vue from 'vue'
-import { Table, TableColumn } from 'element-ui'
+import { Table, TableColumn, Message } from 'element-ui'
 Vue.use(Table).use(TableColumn)
 
 import browser from '@/apis/browse'
@@ -29,7 +29,7 @@ export default {
     this.dispatchList(this.src)
     this.$eventHub.$off('dispatchList')
     this.$eventHub.$on('dispatchList', src => {
-      this.dispatchList(src)
+      this.dispatchList(src, 'isFromBtn')
     })
   },
   methods: {
@@ -46,12 +46,16 @@ export default {
     isGreaterTen(time) {
       return time > 9 ? time : '0' + time;
     },
-    dispatchList(src) {
+    dispatchList(src, type) {
       browser.dispatchLogs(src).then(logs => {
         logs.forEach(l => {
           l.strResult = JSON.stringify(l.result)
         })
         this.logs = logs
+        if (!type) {
+          return
+        }
+        Message({ message: '分发完成', type: 'success', showClose: true })
       })
     }
   }
