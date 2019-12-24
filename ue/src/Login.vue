@@ -1,8 +1,17 @@
 <template>
-  <div class="login">
-    <tms-login :data="data" :submit="getTokenSuccess" class="tms-finder">
-    </tms-login> 
-  </div>
+  <tms-frame id="app" center-color="#f0f3f6" left-width="25%" right-width="25%" :display-sm="{header:true,footer:false}">
+		<template v-slot:header>
+			<p>ETD</p>
+		</template>
+		<template v-slot:center>
+			<div class="login-account">
+				<div class="login-account-form">
+					<tms-login :data="data" :submit="getTokenSuccess"></tms-login>
+				</div>
+				<div class="login-account-third"></div>
+			</div>
+		</template>
+	</tms-frame>
 </template>
 <script>
 import Vue from 'vue'
@@ -47,14 +56,29 @@ export default {
   }
 }
 </script>
-<style scope>
-.login {
-  display: flex;
-  justify-content: center;
-  margin-top: 200px;
-  /* transform: translate(-50%, -50%); */
+<style lang="less" scope>
+.tms-frame__header {
+	margin-top: 40px;
+	text-align: center;
+	& > p {
+		font-size: 18px;
+		font-weight: 700;
+	}
 }
-.login .tms-finder {
-  border: 1px solid #ddd;
+.tms-frame__main {
+    & > .tms-frame__main__center {
+        & > .login-account {
+            width: 100%;
+            & > .login-account-form {
+                width: 330px;
+                margin: 0 auto;
+                padding: 50px 0;
+                & > .login-btn {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
 }
 </style>

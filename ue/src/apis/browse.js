@@ -73,7 +73,7 @@ export default {
   },
   fnGetCaptcha() {
     return TmsAxios.ins(name)
-    .post(`/etd/ue/auth/captcha`)
+    .post(`/etd/ue/auth/captcha?width=150&height=44`)
     .then(rst => Promise.resolve(rst.data))
     .catch(err => Promise.resolve(err))
   },
