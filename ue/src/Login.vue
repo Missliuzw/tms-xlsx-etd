@@ -1,5 +1,5 @@
 <template>
-  <tms-frame id="app" center-color="#f0f3f6" left-width="25%" right-width="25%" :display-sm="{header:true,footer:false}">
+  <tms-frame id="app" class="login" center-color="#f0f3f6" left-width="25%" right-width="25%" :display-sm="{header:true,footer:false}">
 		<template v-slot:header>
 			<p>ETD</p>
 		</template>
@@ -57,28 +57,30 @@ export default {
 }
 </script>
 <style lang="less" scope>
-.tms-frame__header {
-	margin-top: 40px;
-	text-align: center;
-	& > p {
-		font-size: 18px;
-		font-weight: 700;
-	}
-}
-.tms-frame__main {
-    & > .tms-frame__main__center {
-        & > .login-account {
-            width: 100%;
-            & > .login-account-form {
-                width: 330px;
-                margin: 0 auto;
-                padding: 50px 0;
-                & > .login-btn {
-                    width: 100%;
-                    margin-bottom: 10px;
-                }
-            }
-        }
+.login {
+  .tms-frame__header {
+    margin-top: 40px;
+    text-align: center;
+    & > p {
+      font-size: 18px;
+      font-weight: 700;
     }
+  }
+  .tms-frame__main {
+      & > .tms-frame__main__center {
+          & > .login-account {
+              width: 100%;
+              & > .login-account-form {
+                  width: 330px;
+                  margin: 0 auto;
+                  padding: 50px 0;
+                  & > .login-btn {
+                      width: 100%;
+                      margin-bottom: 10px;
+                  }
+              }
+          }
+      }
+  }
 }
 </style>
